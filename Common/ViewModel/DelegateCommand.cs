@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace Common.ViewModel
+namespace AYam.Common.ViewModel
 {
 
 #pragma warning disable 0067    //警告非表示 C#0067

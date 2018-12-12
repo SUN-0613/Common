@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.ViewModel.Custom
+namespace AYam.Common.ViewModel.Custom
 {
 
     /// <summary>
     /// ViewModel基幹
     /// 編集FLG付
     /// </summary>
-    public class EditedBase : Common.ViewModel.Base
+    public class EditedBase : Common.ViewModel.VMBase
     {
 
         /// <summary>
