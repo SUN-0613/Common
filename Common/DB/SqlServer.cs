@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 
@@ -301,23 +302,22 @@ namespace AYam.Common.DB
             try
             {
 
-                SqlCommand sqlCommand = new SqlCommand();
-
-                // 接続情報、トランザクションの設定
-                sqlCommand.Connection = _SqlConnection;
-                sqlCommand.Transaction = _SqlTransaction;
-                sqlCommand.CommandTimeout = queryTimeout;
-
-                // クエリ、パラメータの設定
-                sqlCommand.CommandText = query;
-
-                foreach (KeyValuePair<string, object> parameter in parameters)
+                using (var sqlCommand = new SqlCommand(query, _SqlConnection, _SqlTransaction))
                 {
-                    sqlCommand.Parameters.Add(new SqlParameter(parameter.Key, parameter.Value));
-                }
 
-                // 実行
-                return sqlCommand.ExecuteReader();
+                    // タイムアウトの設定
+                    sqlCommand.CommandTimeout = queryTimeout;
+
+                    // パラメータの設定
+                    foreach (KeyValuePair<string, object> parameter in parameters)
+                    {
+                        sqlCommand.Parameters.Add(new SqlParameter(parameter.Key, parameter.Value));
+                    }
+
+                    // 実行
+                    return sqlCommand.ExecuteReader();
+
+                }
 
             }
             catch (Exception ex)
@@ -347,36 +347,76 @@ namespace AYam.Common.DB
         /// <param name="query">SQL文</param>
         /// <param name="parameters">SQLパラメータ</param>
         /// <param name="queryTimeout">クエリ実行時間(秒)</param>
-        /// <returns>クエリ実行結果</returns>
         public void ExecuteNonQuery(string query, Dictionary<string, object> parameters, int queryTimeout = 30)
         {
 
             try
             {
 
-                SqlCommand sqlCommand = new SqlCommand();
-
-                // 接続情報、トランザクションの設定
-                sqlCommand.Connection = _SqlConnection;
-                sqlCommand.Transaction = _SqlTransaction;
-                sqlCommand.CommandTimeout = queryTimeout;
-
-                // クエリ、パラメータの設定
-                sqlCommand.CommandText = query;
-
-                foreach (KeyValuePair<string, object> parameter in parameters)
+                using (var sqlCommand = new SqlCommand(query, _SqlConnection, _SqlTransaction))
                 {
-                    sqlCommand.Parameters.Add(new SqlParameter(parameter.Key, parameter.Value));
-                }
 
-                // 実行
-                sqlCommand.ExecuteNonQuery();
+                    // タイムアウトの設定
+                    sqlCommand.CommandTimeout = queryTimeout;
+
+                    // パラメータの設定
+                    foreach (KeyValuePair<string, object> parameter in parameters)
+                    {
+                        sqlCommand.Parameters.Add(new SqlParameter(parameter.Key, parameter.Value));
+                    }
+
+                    // 実行
+                    sqlCommand.ExecuteNonQuery();
+
+                }
 
             }
             catch (Exception ex)
             {
 
                 ExceptionMessage = ex.Message;
+
+            }
+
+        }
+
+        /// <summary>
+        /// クエリ実行後、DataTableにて返す
+        /// </summary>
+        /// <param name="query">SQL文</param>
+        /// <param name="queryTimeout">クエリ実行時間(秒)</param>
+        /// <returns>クエリ実行結果</returns>
+        public DataTable ExecuteNonQuery(string query, int queryTimeout = 30)
+        {
+
+            try
+            {
+
+                using (var sqlCommand = new SqlCommand(query, _SqlConnection, _SqlTransaction))
+                {
+
+                    // タイムアウトの設定
+                    sqlCommand.CommandTimeout = queryTimeout;
+
+                    // 実行
+                    sqlCommand.ExecuteNonQuery();
+
+                    // 戻り値作成
+                    var readData = new DataTable();
+                    var dataAdapter = new SqlDataAdapter(sqlCommand);
+
+                    dataAdapter.Fill(readData);
+
+                    return readData;
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                ExceptionMessage = ex.Message;
+                return null;
 
             }
 
