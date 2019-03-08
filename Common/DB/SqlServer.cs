@@ -63,14 +63,14 @@ namespace AYam.Common.DB
         #endregion
 
         /// <summary>
-        /// new
+        /// SQL Server操作管理
         /// SQL Server認証によるDB接続
         /// </summary>
         /// <param name="serverName">接続するサーバ名</param>
         /// <param name="dbName">DB名</param>
         /// <param name="userName">ユーザ名</param>
         /// <param name="password">パスワード</param>
-        /// <param name="timeOut">タイムアウト時間</param>
+        /// <param name="timeOut">タイムアウト時間(秒)</param>
         public SqlServer(string serverName, string dbName, string userName, string password, int timeOut = 30)
         {
 
@@ -86,12 +86,12 @@ namespace AYam.Common.DB
         }
 
         /// <summary>
-        /// new
+        /// SQL Server操作管理
         /// Windows認証によるDB接続
         /// </summary>
         /// <param name="serverName">接続するサーバ名</param>
         /// <param name="dbName">DB名</param>
-        /// <param name="timeOut">タイムアウト時間</param>
+        /// <param name="timeOut">タイムアウト時間(秒)</param>
         public SqlServer(string serverName, string dbName, int timeOut = 30)
         {
 
@@ -124,7 +124,7 @@ namespace AYam.Common.DB
         /// DB接続
         /// </summary>
         /// <param name="integratedSecurity">Windows認証</param>
-        /// <param name="timeOut">タイムアウト時間</param>
+        /// <param name="timeOut">タイムアウト時間(秒)</param>
         private void Open(bool integratedSecurity, int timeOut)
         {
 

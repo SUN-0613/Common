@@ -29,24 +29,28 @@ namespace AYam.Common.ViewModel
         private readonly Func<bool> _CanExecute;
 
         /// <summary>
-        /// new
+        /// Delegateを受け取るICommandの実装
         /// </summary>
         /// <param name="execute">実行メソッド</param>
         public DelegateCommand(Action execute)
         {
+
             _Execute = execute ?? throw new ArgumentNullException(nameof(DelegateCommand) + ":" + nameof(execute));
             _CanExecute = null;
+
         }
 
         /// <summary>
-        /// new
+        /// Delegateを受け取るICommandの実装
         /// </summary>
         /// <param name="execute">実行メソッド</param>
         /// <param name="canExecute">実行メソッドの処理許可</param>
         public DelegateCommand(Action execute, Func<bool> canExecute)
         {
+
             _Execute = execute ?? throw new ArgumentNullException(nameof(DelegateCommand) + ":" + nameof(execute));
             _CanExecute = canExecute ?? throw new ArgumentNullException(nameof(DelegateCommand) + ":" + nameof(canExecute));
+
         }
 
         /// <summary>

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AYam.Common.ViewModel.Custom
+﻿namespace AYam.Common.ViewModel.Custom
 {
 
     /// <summary>
@@ -16,8 +10,8 @@ namespace AYam.Common.ViewModel.Custom
 
         /// <summary>
         /// 編集FLG
-        /// True:編集済
-        /// False:未編集
+        /// true:編集済
+        /// false:未編集
         /// </summary>
         private bool _IsEdited = false;
 
@@ -53,8 +47,11 @@ namespace AYam.Common.ViewModel.Custom
 
             base.CallPropertyChanged(propertyName, stackFrameIndex + 1);
 
+            // 編集FLGの更新
+            // 編集FLGプロパティ更新時は除外
+            // ThrowEditEventNameにて指定されたプロパティ更新時は除外
             if (!propertyName.Equals(nameof(IsEdited))
-                && !(propertyName.Length >= ThrowEditEventName.Length && propertyName.Substring(0, ThrowEditEventName.Length - 1).ToUpper().Equals(ThrowEditEventName.ToUpper())))
+                && !(propertyName.Length >= ThrowEditEventName.Length && propertyName.Substring(0, ThrowEditEventName.Length).ToUpper().Equals(ThrowEditEventName.ToUpper())))
                 IsEdited = true;
 
         }

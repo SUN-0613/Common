@@ -29,9 +29,12 @@ namespace AYam.Common.ViewModel
             //プロパティ名が指定されていない場合は呼び出し元メソッド名とする
             if (propertyName.Length.Equals(0))
             {
-                StackFrame Caller = new StackFrame(stackFrameIndex);        //呼び出し元メソッド情報
-                string[] MethodName = Caller.GetMethod().Name.Split('_');   //呼び出し元メソッド名
-                propertyName = MethodName[MethodName.Length - 1];
+
+                StackFrame caller = new StackFrame(stackFrameIndex);        //呼び出し元メソッド情報
+                string[] methodName = caller.GetMethod().Name.Split('_');   //呼び出し元メソッド名
+
+                propertyName = methodName[methodName.Length - 1];
+
             }
 
             //イベント発生
