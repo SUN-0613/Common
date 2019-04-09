@@ -22,3 +22,7 @@ CommonControls/obj/Debug/Common.Controls.exe
 CommonControls/obj/Debug/App.g.i.cs
 CommonControls/obj/Debug/App.g.cs
 CommonControls/obj/Debug/AYam.Common.Controls.Properties.Resources.resources
+CommonControls/obj/Debug/CommonControls.csproj.CopyComplete
+CommonControls/bin/Debug/System.Windows.Interactivity.xml
+CommonControls/bin/Debug/System.Windows.Interactivity.dll
+CommonControls/bin/Debug/Microsoft.Expression.Interactions.dll
