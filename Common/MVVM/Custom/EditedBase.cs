@@ -1,11 +1,11 @@
-﻿namespace AYam.Common.ViewModel.Custom
+﻿namespace AYam.Common.MVVM.Custom
 {
 
     /// <summary>
     /// ViewModel基幹
     /// 編集FLG付
     /// </summary>
-    public class EditedBase : Common.ViewModel.VMBase
+    public class EditedBase : ViewModelBase
     {
 
         /// <summary>

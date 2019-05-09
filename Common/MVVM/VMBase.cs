@@ -2,13 +2,13 @@
 using System.ComponentModel;
 using System.Diagnostics;
 
-namespace AYam.Common.ViewModel
+namespace AYam.Common.MVVM
 {
 
     /// <summary>
     /// ViewModel基幹
     /// </summary>
-    public class VMBase : INotifyPropertyChanged
+    public class ViewModelBase : INotifyPropertyChanged
     {
 
         /// <summary>
