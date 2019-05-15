@@ -5,7 +5,7 @@
     /// ViewModel基幹
     /// 編集FLG付
     /// </summary>
-    public class EditedBase : ViewModelBase
+    public class EditedViewModelBase : ViewModelBase
     {
 
         /// <summary>
