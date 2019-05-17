@@ -68,8 +68,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Behaviors\TextBox.cs" />
+    <Compile Include="Behaviors\WindowClosing.cs" />
     <Compile Include="Custom\ListBox.cs" />
     <Compile Include="Custom\TreeView.cs" />
+    <Compile Include="Interface\IClosing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
