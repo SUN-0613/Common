@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Interactivity;
 
 namespace AYam.Common.Controls.Behaviors
@@ -6,8 +7,9 @@ namespace AYam.Common.Controls.Behaviors
 
     /// <summary>
     /// TextBox用ビヘイビア
+    /// フォーカスセット時に全選択
     /// </summary>
-    public class TextBoxSelectAll : Behavior<System.Windows.Controls.TextBox>
+    public class TextBoxSelectAll : Behavior<TextBox>
     {
 
         /// <summary>
@@ -42,7 +44,7 @@ namespace AYam.Common.Controls.Behaviors
         private void OnGotFocus(object sender, RoutedEventArgs e)
         {
 
-            if (sender is System.Windows.Controls.TextBox textBox)
+            if (sender is TextBox textBox)
             {
                 textBox.SelectAll();
                 e.Handled = true;
@@ -56,7 +58,7 @@ namespace AYam.Common.Controls.Behaviors
         private void OnPreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
 
-            if (sender is System.Windows.Controls.TextBox textBox)
+            if (sender is TextBox textBox)
             {
 
                 if (!textBox.IsFocused)
