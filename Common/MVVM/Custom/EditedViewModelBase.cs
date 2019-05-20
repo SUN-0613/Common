@@ -23,7 +23,7 @@
         public bool IsEdited
         {
             get { return _IsEdited; }
-            set
+            private set
             {
                 _IsEdited = value;
                 CallPropertyChanged(nameof(IsEdited));
@@ -54,6 +54,14 @@
                 && !(propertyName.Length >= ThrowEditEventName.Length && propertyName.Substring(0, ThrowEditEventName.Length).ToUpper().Equals(ThrowEditEventName.ToUpper())))
                 IsEdited = true;
 
+        }
+
+        /// <summary>
+        /// 編集FLGリセット
+        /// </summary>
+        protected void ResetEditFlg()
+        {
+            IsEdited = false;
         }
 
     }

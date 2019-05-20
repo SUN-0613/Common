@@ -7,7 +7,7 @@ namespace AYam.Common.Controls.Behaviors
     /// <summary>
     /// TextBox用ビヘイビア
     /// </summary>
-    public class TextBox : Behavior<System.Windows.Controls.TextBox>
+    public class TextBoxSelectAll : Behavior<System.Windows.Controls.TextBox>
     {
 
         /// <summary>
