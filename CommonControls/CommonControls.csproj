@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Behaviors\FrameworkElementMoveFocus.cs" />
+    <Compile Include="Behaviors\TextBoxNumberOnly.cs" />
     <Compile Include="Behaviors\TextBoxSelectAll.cs" />
     <Compile Include="Behaviors\WindowClosing.cs" />
     <Compile Include="Custom\ListBox.cs" />

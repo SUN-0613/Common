@@ -44,7 +44,17 @@ namespace AYam.Common.Controls.Behaviors
 
             if (sender is Window form && form.DataContext is IClosing viewModel)
             {
-                e.Cancel = viewModel.OnClosing();
+
+                if (!viewModel.OnClosing())
+                {
+
+                    if (!viewModel.ClosingTitle.Equals(string.Empty) && !viewModel.ClosingMessage.Equals(string.Empty))
+                    {
+                        e.Cancel = MessageBox.Show(viewModel.ClosingMessage, viewModel.ClosingTitle, MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No, MessageBoxOptions.DefaultDesktopOnly).Equals(MessageBoxResult.No);
+                    }
+
+                }
+
             }
 
         }
