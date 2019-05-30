@@ -68,10 +68,21 @@ namespace AYam.Common.Data.File
             _RootTag = root;
             _Declaration = declaration == null ? declaration : new XDeclaration("1.0", "utf-8", null);
 
-            ReadXmlFile();
+            // ReadXmlFile();
+
+            if (System.IO.File.Exists(_FilePath))
+            {
+
+                _Document = XDocument.Load(_FilePath);
+                Element = _Document.Element(_RootTag);
+
+            }
+
+            Read();
 
         }
 
+        /*
         /// <summary>
         /// XMLファイルを読み込みデータテーブルに登録
         /// </summary>
@@ -94,6 +105,7 @@ namespace AYam.Common.Data.File
             Read();
 
         }
+        */
 
         /// <summary>
         /// 終了処理
@@ -108,9 +120,18 @@ namespace AYam.Common.Data.File
         /// <param name="tag">子要素タグ名</param>
         /// <param name="defaultValue">値取得失敗時の戻り値</param>
         /// <returns>値</returns>
-        protected T GetValue<T>(string tag, T defaultValue = default(T))
+        protected T GetValue<T>(string tag, T defaultValue)
         {
-            return GetValue(Element.Element(tag), defaultValue);
+
+            if (Element != null)
+            {
+                return GetValue(Element.Element(tag), defaultValue);
+            }
+            else
+            {
+                return defaultValue;
+            }
+            
         }
 
         /// <summary>
@@ -121,12 +142,21 @@ namespace AYam.Common.Data.File
         /// <param name="tag">子要素タグ名</param>
         /// <param name="defaultValue">値取得失敗時の戻り値</param>
         /// <returns>値</returns>
-        protected T GetValue<T>(XElement element, T defaultValue = default(T))
+        protected T GetValue<T>(XElement element, T defaultValue)
         {
 
-            var value = ValueConvert.FromString<T>(element.Value);
+            if (element != null)
+            {
 
-            return value.Equals(default(T)) ? defaultValue : value;
+                var value = ValueConvert.FromString<T>(element.Value);
+
+                return value.Equals(default(T)) ? defaultValue : value;
+
+            }
+            else
+            {
+                return defaultValue;
+            }
 
         }
 
@@ -137,7 +167,7 @@ namespace AYam.Common.Data.File
         /// <param name="name">属性名称</param>
         /// <param name="defaultValue">値取得失敗時の戻り値</param>
         /// <returns>値</returns>
-        protected T GetAttribute<T>(string name, T defaultValue = default(T))
+        protected T GetAttribute<T>(string name, T defaultValue)
         {
             return GetAttribute(Element, name, defaultValue);
         }
@@ -150,12 +180,21 @@ namespace AYam.Common.Data.File
         /// <param name="name">属性名称</param>
         /// <param name="defaultValue">値取得失敗時の戻り値</param>
         /// <returns>値</returns>
-        protected T GetAttribute<T>(XElement element, string name, T defaultValue = default(T))
+        protected T GetAttribute<T>(XElement element, string name, T defaultValue)
         {
 
-            var value = ValueConvert.FromString<T>(element.Attribute(name).Value);
+            if (element != null)
+            {
 
-            return value.Equals(default(T)) ? defaultValue : value;
+                var value = ValueConvert.FromString<T>(element.Attribute(name).Value);
+
+                return value.Equals(default(T)) ? defaultValue : value;
+
+            }
+            else
+            {
+                return defaultValue;
+            }
 
         }
 
@@ -250,16 +289,11 @@ namespace AYam.Common.Data.File
         /// XMLファイル書込
         /// </summary>
         /// <param name="document">保存するXMLオブジェクト</param>
-        private async void WriteFile(XDocument document)
+        private void WriteFile(XDocument document)
         {
 
-            await Task.Run(() =>
-            {
-
-                _Document = document;
-                _Document.Save(_FilePath);
-
-            });
+            _Document = document;
+            _Document.Save(_FilePath);
 
         }
 
