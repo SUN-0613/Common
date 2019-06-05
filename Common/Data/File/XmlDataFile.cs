@@ -135,6 +135,28 @@ namespace AYam.Common.Data.File
         }
 
         /// <summary>
+        /// 指定要素の子要素から値取得
+        /// </summary>
+        /// <typeparam name="T">型指定</typeparam>
+        /// <param name="element">指定要素</param>
+        /// <param name="tag">子要素タグ名</param>
+        /// <param name="defaultValue">値取得失敗時の戻り値</param>
+        /// <returns>値</returns>
+        protected T GetValue<T>(XElement element, string tag, T defaultValue)
+        {
+
+            if (element != null)
+            {
+                return GetValue(element.Element(tag), defaultValue);
+            }
+            else
+            {
+                return defaultValue;
+            }
+
+        }
+
+        /// <summary>
         /// 指定要素から値取得
         /// </summary>
         /// <typeparam name="T">型指定</typeparam>
