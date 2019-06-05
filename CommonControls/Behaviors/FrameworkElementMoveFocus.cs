@@ -43,30 +43,25 @@ namespace AYam.Common.Controls.Behaviors
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
 
-            switch (e.Key)
+            if (sender is FrameworkElement element)
             {
 
-                case Key.Enter:
+                switch (e.Key)
+                {
 
-                    if (sender is TextBox textBox)
-                    {
+                    case Key.Enter:
 
-                        if (!textBox.AcceptsReturn
-                            || (textBox.AcceptsReturn && Keyboard.Modifiers.Equals(ModifierKeys.Alt)))
-                        {
-                            textBox.MoveFocus(new TraversalRequest(Keyboard.Modifiers.Equals(ModifierKeys.Shift) ? FocusNavigationDirection.Previous : FocusNavigationDirection.Next));
-                        }
+                        var request = new TraversalRequest(Keyboard.Modifiers.Equals(ModifierKeys.Shift) 
+                                            ? FocusNavigationDirection.Previous 
+                                            : FocusNavigationDirection.Next);
 
-                    }
-                    else if (sender is FrameworkElement element)
-                    {
-                        element.MoveFocus(new TraversalRequest(Keyboard.Modifiers.Equals(ModifierKeys.Shift) ? FocusNavigationDirection.Previous : FocusNavigationDirection.Next));
-                    }
+                        element.MoveFocus(request);
+                        break;
 
-                    break;
+                    default:
+                        break;
 
-                default:
-                    break;
+                }
 
             }
 
