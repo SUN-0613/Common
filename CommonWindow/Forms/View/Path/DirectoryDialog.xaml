@@ -1,0 +1,72 @@
+﻿<Window x:Class="AYam.Common.Window.Forms.View.Path.DirectoryDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        xmlns:vm="clr-namespace:AYam.Common.Window.Forms.ViewModel.Path"
+        xmlns:p="clr-namespace:AYam.Common.Window.Properties"
+        Title="{Binding Path=DirectoryDialog, Source={StaticResource resourcesTitle}}" 
+        Height="400" Width="300">
+    <Window.DataContext>
+        <vm:DirectoryDialog />
+    </Window.DataContext>
+    <Window.Resources>
+        <p:Path x:Key="resources" />
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="5" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="5" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="5" />
+        </Grid.ColumnDefinitions>
+
+        <!-- パス選択 -->
+        <TextBlock Grid.Row="1" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1" Text="{Binding Message, Mode=OneWay}" VerticalAlignment="Center" />
+        <Frame Grid.Row="2" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1" Content="{Binding Page, Mode=OneWay}" >
+            <Frame.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="{Binding Path=Button_MakeDirectory, Source={StaticResource resourcesCommon}}" Command="{Binding DirectoryCommand}" CommandParameter="add" />
+                    <MenuItem Header="{Binding Path=Button_RenameDirectory, Source={StaticResource resourcesCommon}}" Command="{Binding DirectoryCommand}" CommandParameter="rename" />
+                    <MenuItem Header="{Binding Path=Button_DeleteDirectory, Source={StaticResource resourcesCommon}}" Command="{Binding DirectoryCommand}" CommandParameter="delete" />
+                </ContextMenu>
+            </Frame.ContextMenu>
+        </Frame>
+
+        <!-- ボタン -->
+        <Grid Grid.Row="4" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            
+            <Button Grid.Row="0" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1" Content="{Binding Path=Button_Select, Source={StaticResource resourcesCommon}}" >
+                <Button.InputBindings>
+                    <MouseBinding Command="{Binding SelectCommand}" MouseAction="LeftClick" />
+                </Button.InputBindings>
+            </Button>
+
+            <Button Grid.Row="0" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="1" Content="{Binding Path=Button_Close, Source={StaticResource resourcesCommon}}" >
+                <Button.InputBindings>
+                    <MouseBinding Command="{Binding CancelCommand}" MouseAction="LeftClick" />
+                </Button.InputBindings>
+            </Button>
+
+        </Grid>
+
+    </Grid>
+</Window>
