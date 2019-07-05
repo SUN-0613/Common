@@ -26,18 +26,18 @@ namespace AYam.Common.MVVM
 
             if (PropertyChanged == null) return;
 
-            //プロパティ名が指定されていない場合は呼び出し元メソッド名とする
+            // プロパティ名が指定されていない場合は呼び出し元メソッド名とする
             if (propertyName.Length.Equals(0))
             {
 
-                StackFrame caller = new StackFrame(stackFrameIndex);        //呼び出し元メソッド情報
-                string[] methodName = caller.GetMethod().Name.Split('_');   //呼び出し元メソッド名
+                StackFrame caller = new StackFrame(stackFrameIndex);        // 呼び出し元メソッド情報
+                string[] methodNames = caller.GetMethod().Name.Split('_');  // 呼び出し元メソッド名
 
-                propertyName = methodName[methodName.Length - 1];
+                propertyName = methodNames[methodNames.Length - 1];
 
             }
 
-            //イベント発生
+            // イベント発生
             PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 
         }

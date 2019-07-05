@@ -51,6 +51,11 @@ namespace AYam.Common.Data.File
         public abstract void Save();
 
         /// <summary>
+        /// 終了処理
+        /// </summary>
+        public abstract void Dispose();
+
+        /// <summary>
         /// データファイル管理
         /// XMLファイル読込後、Read()実行
         /// using System.Xml.Linq; 推奨
@@ -66,9 +71,7 @@ namespace AYam.Common.Data.File
 
             _FilePath = path;
             _RootTag = root;
-            _Declaration = declaration == null ? declaration : new XDeclaration("1.0", "utf-8", null);
-
-            // ReadXmlFile();
+            _Declaration = declaration ?? new XDeclaration("1.0", "utf-8", null);
 
             if (System.IO.File.Exists(_FilePath))
             {
@@ -82,37 +85,6 @@ namespace AYam.Common.Data.File
 
         }
 
-        /*
-        /// <summary>
-        /// XMLファイルを読み込みデータテーブルに登録
-        /// </summary>
-        private async void ReadXmlFile()
-        {
-
-            await Task.Run(() =>
-            {
-
-                if (System.IO.File.Exists(_FilePath))
-                {
-
-                    _Document = XDocument.Load(_FilePath);
-                    Element = _Document.Element(_RootTag);
-
-                }
-
-            });
-
-            Read();
-
-        }
-        */
-
-        /// <summary>
-        /// 終了処理
-        /// </summary>
-        public virtual void Dispose()
-        { }
-
         /// <summary>
         /// 現在要素の子要素から値取得
         /// </summary>
@@ -122,16 +94,7 @@ namespace AYam.Common.Data.File
         /// <returns>値</returns>
         protected T GetValue<T>(string tag, T defaultValue)
         {
-
-            if (Element != null)
-            {
-                return GetValue(Element.Element(tag), defaultValue);
-            }
-            else
-            {
-                return defaultValue;
-            }
-            
+            return Element != null ? GetValue(Element.Element(tag), defaultValue) : defaultValue;
         }
 
         /// <summary>
@@ -144,16 +107,7 @@ namespace AYam.Common.Data.File
         /// <returns>値</returns>
         protected T GetValue<T>(XElement element, string tag, T defaultValue)
         {
-
-            if (element != null)
-            {
-                return GetValue(element.Element(tag), defaultValue);
-            }
-            else
-            {
-                return defaultValue;
-            }
-
+            return element != null ? GetValue(element.Element(tag), defaultValue) : defaultValue;
         }
 
         /// <summary>
