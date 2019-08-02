@@ -1,7 +1,6 @@
 ﻿using AYam.Common.Method;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace AYam.Common.Data.File
