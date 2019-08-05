@@ -71,5 +71,8 @@
     <Compile Include="MVVM\DelegateCommand.cs" />
     <Compile Include="MVVM\Custom\EditedViewModelBase.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

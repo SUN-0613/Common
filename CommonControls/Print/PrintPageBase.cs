@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Printing;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents; // PresentationFramework
@@ -40,7 +41,7 @@ namespace AYam.Common.Controls.Print
         /// <summary>
         /// 印刷ページ一覧
         /// </summary>
-        protected List<object> Pages = new List<object>();
+        protected List<object> PrintPages = new List<object>();
 
         /// <summary>
         /// 印刷実行クラス
@@ -62,10 +63,10 @@ namespace AYam.Common.Controls.Print
         private void InitializePages()
         {
 
-            if (Pages != null)
+            if (PrintPages != null)
             {
 
-                Pages.ForEach(page =>
+                PrintPages.ForEach(page =>
                 {
                     if (page is IDisposable dispose)
                     {
@@ -73,8 +74,8 @@ namespace AYam.Common.Controls.Print
                     }
                 });
 
-                Pages.Clear();
-                Pages = null;
+                PrintPages.Clear();
+                PrintPages = null;
 
             }
 
@@ -84,15 +85,15 @@ namespace AYam.Common.Controls.Print
         /// 印刷実行
         /// </summary>
         /// <remarks>エラーメッセージ</remarks>
-        protected string ExecutePrint()
+        protected async Task<string> Print()
         {
 
             try
             {
 
-                if (Pages.Count.Equals(0))
+                if (PrintPages.Count.Equals(0))
                 {
-                    throw new NullReferenceException();
+                    throw new NullReferenceException("Pages is blank");
                 }
 
                 using (var printServer = new LocalPrintServer())
@@ -111,13 +112,20 @@ namespace AYam.Common.Controls.Print
                         // 印刷内容作成
                         var document = new FixedDocument();
 
-                        Pages.ForEach(page => 
+                        PrintPages.ForEach(page => 
                         {
                             document.Pages.Add(CreatePageContent(page, PageSize));
                         });
 
                         // 印刷実行
-                        writer.WriteAsync(document, ticket);
+                        await Task.Run(() => 
+                        {
+                            writer.Write(document, ticket);
+                        });
+
+                        // 初期化
+                        InitializePages();
+                        PrintPages = new List<object>();
 
                     }
 
