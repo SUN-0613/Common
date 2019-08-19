@@ -89,11 +89,46 @@ namespace AYam.Common.Data.File
         /// </summary>
         /// <typeparam name="T">型指定</typeparam>
         /// <param name="tag">子要素タグ名</param>
+        /// <returns>値</returns>
+        protected T GetValue<T>(string tag)
+        {
+            return Element != null ? GetValue(Element.Element(tag), default(T)) : default(T);
+        }
+
+        /// <summary>
+        /// 現在要素の子要素から値取得
+        /// </summary>
+        /// <typeparam name="T">型指定</typeparam>
+        /// <param name="tag">子要素タグ名</param>
         /// <param name="defaultValue">値取得失敗時の戻り値</param>
         /// <returns>値</returns>
         protected T GetValue<T>(string tag, T defaultValue)
         {
             return Element != null ? GetValue(Element.Element(tag), defaultValue) : defaultValue;
+        }
+
+        /// <summary>
+        /// 指定要素から値取得
+        /// </summary>
+        /// <typeparam name="T">型指定</typeparam>
+        /// <param name="element">指定要素</param>
+        /// <param name="tag">子要素タグ名</param>
+        /// <returns>値</returns>
+        protected T GetValue<T>(XElement element)
+        {
+            return element != null ? ValueConvert.FromString<T>(element.Value) : default(T);
+        }
+
+        /// <summary>
+        /// 指定要素の子要素から値取得
+        /// </summary>
+        /// <typeparam name="T">型指定</typeparam>
+        /// <param name="element">指定要素</param>
+        /// <param name="tag">子要素タグ名</param>
+        /// <returns>値</returns>
+        protected T GetValue<T>(XElement element, string tag)
+        {
+            return element != null ? GetValue(element.Element(tag), default(T)) : default(T);
         }
 
         /// <summary>
@@ -140,6 +175,17 @@ namespace AYam.Common.Data.File
         /// </summary>
         /// <typeparam name="T">型指定</typeparam>
         /// <param name="name">属性名称</param>
+        /// <returns>値</returns>
+        protected T GetAttribute<T>(string name)
+        {
+            return GetAttribute(Element, name, default(T));
+        }
+
+        /// <summary>
+        /// 現在要素の指定属性値を取得
+        /// </summary>
+        /// <typeparam name="T">型指定</typeparam>
+        /// <param name="name">属性名称</param>
         /// <param name="defaultValue">値取得失敗時の戻り値</param>
         /// <returns>値</returns>
         protected T GetAttribute<T>(string name, T defaultValue)
@@ -153,12 +199,24 @@ namespace AYam.Common.Data.File
         /// <typeparam name="T">型指定</typeparam>
         /// <param name="element">指定要素</param>
         /// <param name="name">属性名称</param>
+        /// <returns>値</returns>
+        protected T GetAttribute<T>(XElement element, string name)
+        {
+            return (element != null && element.Attribute(name) != null) ? ValueConvert.FromString<T>(element.Attribute(name).Value) : default(T);
+        }
+
+        /// <summary>
+        /// 指定要素から指定属性値を取得
+        /// </summary>
+        /// <typeparam name="T">型指定</typeparam>
+        /// <param name="element">指定要素</param>
+        /// <param name="name">属性名称</param>
         /// <param name="defaultValue">値取得失敗時の戻り値</param>
         /// <returns>値</returns>
         protected T GetAttribute<T>(XElement element, string name, T defaultValue)
         {
 
-            if (element != null)
+            if (element != null && element.Attribute(name) != null)
             {
 
                 var value = ValueConvert.FromString<T>(element.Attribute(name).Value);
