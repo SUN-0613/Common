@@ -74,7 +74,7 @@ namespace AYam.Common.MVVM
         }
 
         /// <summary>
-        /// メソッド実行許可の確認
+        /// コマンドが実行可能か決定する
         /// </summary>
         /// <returns>
         /// True:OK

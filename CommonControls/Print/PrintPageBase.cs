@@ -85,7 +85,7 @@ namespace AYam.Common.Controls.Print
         /// 印刷実行
         /// </summary>
         /// <remarks>エラーメッセージ</remarks>
-        protected async Task<string> Print()
+        protected string Print()
         {
 
             try
@@ -118,10 +118,7 @@ namespace AYam.Common.Controls.Print
                         });
 
                         // 印刷実行
-                        await Task.Run(() => 
-                        {
-                            writer.Write(document, ticket);
-                        });
+                        writer.Write(document, ticket);
 
                         // 初期化
                         InitializePages();
