@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,6 +34,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -94,7 +96,11 @@
     <Compile Include="Behaviors\FrameworkElementMoveFocus.cs" />
     <Compile Include="Behaviors\TextBoxNumberOnly.cs" />
     <Compile Include="Behaviors\TextBoxSelectAll.cs" />
+    <Compile Include="Custom\DataGridTemplateColumn.cs" />
     <Compile Include="Print\PrintPageBase.cs" />
+    <Compile Include="ResourceDictionary\DataGridSingleClickStyle.xaml.cs">
+      <DependentUpon>DataGridSingleClickStyle.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TriggerBehaviors\TextBoxUpdate.cs" />
     <Compile Include="Behaviors\WindowClosing.cs" />
     <Compile Include="Custom\ListBox.cs" />
@@ -128,6 +134,12 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="ResourceDictionary\DataGridSingleClickStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
