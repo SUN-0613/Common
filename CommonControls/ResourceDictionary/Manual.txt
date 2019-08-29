@@ -1,0 +1,10 @@
+﻿実際に使用する時はこのように設定する
+    
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Common.Controls;component/ResourceDictionary/DataGridSingleClickStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
