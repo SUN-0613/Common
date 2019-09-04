@@ -97,6 +97,7 @@
     <Compile Include="Behaviors\TextBoxNumberOnly.cs" />
     <Compile Include="Behaviors\TextBoxSelectAll.cs" />
     <Compile Include="Custom\DataGridTemplateColumn.cs" />
+    <Compile Include="Custom\ListView.cs" />
     <Compile Include="Print\PrintPageBase.cs" />
     <Compile Include="ResourceDictionary\DataGridSingleClickStyle.xaml.cs">
       <DependentUpon>DataGridSingleClickStyle.xaml</DependentUpon>
