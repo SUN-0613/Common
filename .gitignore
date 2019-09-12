@@ -29,3 +29,5 @@ CommonControls/bin/Debug/Microsoft.Expression.Interactions.dll
 CommonControls/obj/
 CommonControls/bin/
 Common/.vs/
+/CommonWindow
+CommonControls/.vs/
