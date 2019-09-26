@@ -55,11 +55,11 @@ namespace AYam.Common.DB
                             .Append("Initial Catalog = ").Append(dbName).Append(";")
                             .Append("User ID = ").Append(userName).Append(";")
                             .Append("Password = ").Append(password).Append(";")
-                            .Append("MultipleActiveResultSets = True")
+                            .Append("MultipleActiveResultSets = True;")
                             .Append("Connection Timeout = ").Append(timeOut.ToString());
 
             // 接続開始
-            Open(connectionString.ToString(), timeOut);
+            Open(connectionString.ToString());
 
             connectionString.Clear();
             connectionString = null;
@@ -86,7 +86,7 @@ namespace AYam.Common.DB
                             .Append("Connection Timeout = ").Append(timeOut.ToString());
 
             // 接続開始
-            Open(connectionString.ToString(), timeOut);
+            Open(connectionString.ToString());
 
             connectionString.Clear();
             connectionString = null;
@@ -132,9 +132,8 @@ namespace AYam.Common.DB
         #region 接続、切断
 
         /// <summary>SQL Server接続</summary>
-        /// <param name="integratedSecurity">Windows認証で接続するか</param>
-        /// <param name="timeOut">タイムアウト(秒)</param>
-        private void Open(string connectionString, int timeOut)
+        /// <param name="connectionString">接続するためのパラメータ</param>
+        private void Open(string connectionString)
         {
 
             try
