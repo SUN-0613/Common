@@ -106,7 +106,7 @@ namespace AYam.Common.DB
         }
 
         /// <summary>エラー情報の初期化</summary>
-        private void InitializeException()
+        private void InitializeException(bool checkConnect = true)
         {
 
             if (!string.IsNullOrEmpty(ExceptionMessage))
@@ -114,7 +114,10 @@ namespace AYam.Common.DB
                 ExceptionMessage = string.Empty;
             }
 
-            CheckConnect();
+            if (checkConnect)
+            {
+                CheckConnect();
+            }
 
         }
 
@@ -163,7 +166,7 @@ namespace AYam.Common.DB
             try
             {
 
-                InitializeException();
+                InitializeException(false);
 
                 // 切断
                 if (_IsConnect)
