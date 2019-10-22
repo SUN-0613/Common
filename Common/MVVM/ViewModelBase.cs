@@ -8,7 +8,7 @@ namespace AYam.Common.MVVM
     /// <summary>
     /// ViewModel基幹
     /// </summary>
-    public class ViewModelBase : INotifyPropertyChanged
+    public abstract class ViewModelBase : INotifyPropertyChanged
     {
 
         /// <summary>
