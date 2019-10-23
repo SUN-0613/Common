@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Windows;
-using System.Windows.Controls;
+using Controls = System.Windows.Controls;
 
 namespace AYam.Common.Controls.Custom
 {
@@ -12,7 +11,7 @@ namespace AYam.Common.Controls.Custom
     /// <remarks>
     /// SelectedItemsをBinding可
     /// </remarks>
-    public class ListBox : System.Windows.Controls.ListBox, IDisposable
+    public class ListBox : Controls::ListBox
     {
 
         #region DependencyProperty
@@ -24,7 +23,7 @@ namespace AYam.Common.Controls.Custom
                                         = DependencyProperty.Register(
                                         nameof(BindableSelectedItems)
                                         , typeof(IList)
-                                        , typeof(AYam.Common.Controls.Custom.ListBox)
+                                        , typeof(ListBox)
                                         , new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         #endregion
@@ -47,32 +46,16 @@ namespace AYam.Common.Controls.Custom
         /// <summary>
         /// 選択箇所変更イベント
         /// </summary>
-        protected override void OnSelectionChanged(SelectionChangedEventArgs e)
+        protected override void OnSelectionChanged(Controls::SelectionChangedEventArgs e)
         {
 
             base.OnSelectionChanged(e);
 
-            BindableSelectedItems = base.SelectedItems;
+            SetValue(BindableSelectedItemsProperty, SelectedItems);
 
         }
 
         #endregion
-
-        /// <summary>
-        /// ListBoxカスタマイズ
-        /// </summary>
-        public ListBox()
-        {
-
-        }
-
-        /// <summary>
-        /// 終了処理
-        /// </summary>
-        public void Dispose()
-        {
-
-        }
 
     }
 

@@ -1,5 +1,5 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
+using Controls = System.Windows.Controls;
 
 namespace AYam.Common.Controls.Custom
 {
@@ -10,7 +10,7 @@ namespace AYam.Common.Controls.Custom
     /// <remarks>
     /// SelectedItemをBinding可
     /// </remarks>
-    public class TreeView : System.Windows.Controls.TreeView, IDisposable
+    public class TreeView : Controls::TreeView
     {
 
         #region DependencyProperty
@@ -22,7 +22,7 @@ namespace AYam.Common.Controls.Custom
                                         = DependencyProperty.Register(
                                         nameof(BindableSelectedItem)
                                         , typeof(object)
-                                        , typeof(AYam.Common.Controls.Custom.TreeView)
+                                        , typeof(TreeView)
                                         , new UIPropertyMetadata(null));
 
         #endregion
@@ -45,33 +45,16 @@ namespace AYam.Common.Controls.Custom
         /// <summary>
         /// 選択箇所変更イベント
         /// </summary>
-        protected virtual void OnSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        protected override void OnSelectedItemChanged(RoutedPropertyChangedEventArgs<object> e)
         {
 
-            if (SelectedItem != null)
-            {
-                SetValue(BindableSelectedItemProperty, SelectedItem);
-            }
+            base.OnSelectedItemChanged(e);
+
+            SetValue(BindableSelectedItemProperty, SelectedItem);
 
         }
 
         #endregion
-
-        /// <summary>
-        /// TreeViewカスタマイズ
-        /// </summary>
-        public TreeView()
-        {
-            SelectedItemChanged += OnSelectedItemChanged;
-        }
-
-        /// <summary>
-        /// 終了処理
-        /// </summary>
-        public void Dispose()
-        {
-            SelectedItemChanged -= OnSelectedItemChanged;
-        }
 
     }
 
